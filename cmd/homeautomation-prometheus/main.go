@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/armon/go-metrics/prometheus"
 	"github.com/orktes/homeautomation-metrics/internal/collector"
@@ -36,7 +37,7 @@ func main() {
 		panic(err)
 	}
 
-	prometheusSink, err := prometheus.NewPrometheusSink()
+	prometheusSink, err := prometheus.NewPrometheusSinkFrom(prometheus.PrometheusOpts{Expiration: time.Duration(0)})
 	if err != nil {
 		panic(err)
 	}
